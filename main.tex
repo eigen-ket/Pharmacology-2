@@ -1,0 +1,1247 @@
+\documentclass[10pt]{amsart}
+\usepackage{lmodern}
+
+\makeatletter
+\ifcase \@ptsize \relax% 10pt
+  \newcommand{\miniscule}{\@setfontsize\miniscule{4}{5}}% \tiny: 5/6
+\or% 11pt
+  \newcommand{\miniscule}{\@setfontsize\miniscule{5}{6}}% \tiny: 6/7
+\or% 12pt
+  \newcommand{\miniscule}{\@setfontsize\miniscule{5}{6}}% \tiny: 6/7
+\fi
+\makeatother
+
+\usepackage{changepage}
+%     If your article includes graphics, uncomment this command.
+\usepackage{colortbl}
+%\usepackage{graphicx}
+\usepackage{leftidx}
+\usepackage{mathtools}
+\usepackage{graphicx}
+
+\usepackage{expl3}
+\ExplSyntaxOn
+\cs_new_eq:NN \fpeval \fp_eval:n
+\cs_new_eq:NN \clistitem \clist_item:Nn
+\cs_new_eq:NN \foreachint \int_step_inline:nnnn
+\ExplSyntaxOff
+
+\usepackage{pgf}
+\usepackage{pgf-spectra}
+%\usepackage{fp}
+%\usetikzlibrary{fpu}
+%\usetikzlibrary{fpu}
+
+%\pgfkeys{/pgf/fpu=true}
+
+\newcommand{\eq}{=}
+\newcommand{\setvalue}[1]{\pgfkeys{/variables/#1}}
+\newcommand{\getvalue}[1]{\pgfkeysvalueof{/variables/#1}}
+\newcommand{\declare}[1]{%
+ \pgfkeys{
+  /variables/#1.is family,
+  /variables/#1.unknown/.style = {\pgfkeyscurrentpath/\pgfkeyscurrentname/.initial = ##1}
+ }%
+}
+\pgfkeys{/pgf/number format/.cd ,precision=12,sci generic={exponent={\times 10^{#1}}}}
+%\pgfset{fpu=true}
+
+
+\usepackage{gnuplottex}
+\usepackage{siunitx}
+%\usepackage{subcaption}
+%\usepackage{subfigure}
+\usepackage{float}
+\newcommand{\sinc}{\operatorname{sinc}}
+\newcommand{\rect}{\operatorname{rect}}
+\newcommand{\wll}{\textcolor{white}{123}}
+\newcommand{\tot}{\text{tot}}
+\newcommand{\ptl}{\text{ptl}}
+\newcommand{\ove}{\operatorname{vec}}
+\newcommand{\apr}{\text{apparatus}}
+\newcommand{\dtr}{\text{dtr}}
+\newcommand{\initial}{\text{initial}}
+\newcommand{\final}{\text{final}}
+\newcommand{\BS}{\operatorname{BS}}
+\newcommand{\path}{\text{path}}
+\newcommand{\up}{\uparrow}
+\newcommand{\down}{\downarrow}
+%\usepackage[dvipsnames]{xcolor}
+
+%\usepackage[x11names]{xcolor}
+\newtagform{blue}{\color{blue}(}{)}
+%\usepackage[dvipsnames]{xcolor}
+
+%\usepackage{pgfplots} 
+ %   \usetikzlibrary{intersections}
+    % use this `compat' level or higher so that TikZ coordinates don't have to be prefixed
+    % with `axis cs:'
+  %  \pgfplotsset{width=15cm,compat=1.11}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{helvet}
+%\usepackage[leqno]{amsmath}
+%\usepackage{blindtext}
+\usepackage{bbm}
+
+\makeatletter
+\newcommand{\newparallel}{\mathrel{\mathpalette\new@parallel\relax}}
+\newcommand{\new@parallel}[2]{%
+  \begingroup
+  \sbox\z@{$#1T$}% get the height of an uppercase letter
+  \resizebox{!}{\ht\z@}{\raisebox{\depth}{$\m@th#1/\mkern-5mu/$}}%
+  \endgroup
+}
+\makeatother
+
+
+
+\DeclareSymbolFont{extraup}{U}{zavm}{m}{n}
+\DeclareMathSymbol{\varheart}{\mathalpha}{extraup}{86}
+\DeclareMathSymbol{\vardiamond}{\mathalpha}{extraup}{87}
+\newcommand{\redheart}{\textcolor{red}{$\varheart$}}
+\newcommand{\heart}{\ensuremath\varheart}
+
+%\definecolor{orange}{rgb}{1.0, 0.7, 0}
+\definecolor{awesome}{rgb}{1.0, 0.13, 0.32}
+\definecolor{}{rgb}{0.0, 0.0, 0.60}
+\makeatletter\newcommand{\leqnomode}{\tagsleft@true\let\veqno\@@leqno}
+\newcommand{\reqnomode}{\tagsleft@false\let\veqno\@@eqno}\makeatother
+
+\makeatletter
+\newcommand{\pushright}[1]{\ifmeasuring@#1\else\omit\hfill$\displaystyle#1$\fi\ignorespaces}
+\newcommand{\pushleft}[1]{\ifmeasuring@#1\else\omit$\displaystyle#1$\hfill\fi\ignorespaces}
+\makeatother
+
+\makeatletter
+\newcommand{\specialcell}[1]{\ifmeasuring@#1\else\omit$\displaystyle#1$\ignorespaces\fi}
+\makeatother
+
+%\newcommand{\subsec}[1]{\begin{adjustwidth}{-0.1in}{0in}\Large\textbf{\textcolor{darkblue}{#1}}\end{adjustwidth}\normalsize \vspace{1ex}}
+
+\newcommand{\linebreakc}{\textcolor{white}{bl}\\}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+% use KoTeX package for Korean 
+\usepackage{kotex}
+% for the fancy \koTeX logo
+\usepackage{kotex-logo}
+
+
+\newcommand{\expp}[1]{\exp\left(#1\right)}
+\newcommand{\expb}[1]{\exp\left[#1\right]}
+\newcommand{\sinb}[1]{\sin\left[#1\right]}
+\newcommand{\cosb}[1]{\cos\left[#1\right]}
+\newcommand{\sinp}[1]{\sin\left(#1\right)}
+\newcommand{\cosp}[1]{\cos\left(#1\right)}
+
+\newcommand{\logb}[1]{\log\left[#1\right]}
+\newcommand{\lnb}[1]{\ln\left[#1\right]}
+\newcommand{\logp}[1]{\log\left(#1\right)}
+\newcommand{\lnp}[1]{\ln\left(#1\right)}
+
+
+\usepackage{hyperref}
+\usepackage[nameinlink,capitalize]{cleveref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={Homework 4 : Lindblad equation },
+    bookmarks=true,
+    pdfpagemode=FullScreen,
+    }
+\let\oldref\ref
+\renewcommand{\ref}[1]{(\oldref{#1})} 
+\def\equationautorefname~#1\null{(#1)\null}
+\newcommand{\tagg}[1]{\stepcounter{equation}\tag{\theequation}\label{#1} }
+\urlstyle{same}
+\newcommand{\taggg}[1]{\tag{#1}\label{#1} }
+%\usepackage{subfig}
+
+
+%\numberwithin{equation}{section}
+
+%\numberwithin{example}{section}
+%\usepackage{subfig}
+
+%\numberwithin{subfigure}{figure}
+
+%\captionsetup[subfigure]{subrefformat=simple,labelformat=simple,listofformat=subsimple}
+%\renewcommand\thesubfigure{(\alph{subfigure})}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\numberwithin{theorem}{section}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+\newtheorem{exercise}{Exercise}
+\newtheorem*{exercise*}{Exercise}
+\crefname{exercise}{Exercise}{exercises}
+
+\newtheorem{example}{Example}
+\newtheorem*{example*}{Example}
+\numberwithin{example}{section}
+%\newtheorem{lemma}[lemma]{Lemma}
+%\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+%\newtheorem{exercise}[theorem]{Exercise}
+
+
+
+
+
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem*{remark*}{Remark}
+\newtheorem{problem}{Problem}
+\newtheorem*{problem*}{Problem}
+
+\newtheorem{innercustompro}{Problem}
+\newenvironment{prob}[1]
+  {\renewcommand\theinnercustompro{#1}\innercustompro}
+  {\endinnercustompro}
+
+
+
+
+\newtheorem{innercustomlem}{Lemma}
+\newenvironment{lem}[1]
+  {\renewcommand\theinnercustomlem{#1}\innercustomlem}
+  {\endinnercustomlem}
+  
+\newtheorem{innercustomthm}{Theorem}
+\newenvironment{thm}[1]
+  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+  {\endinnercustomthm}
+
+
+\newenvironment{prf}
+  {\begin{proof}[\textbf{\textcolor{magenta}{Proof}}\\]}
+  {\end{proof}}
+\makeatletter
+  \renewcommand\@upn{\textit}
+\makeatother
+
+
+
+\newenvironment{solution}
+  {\begin{proof}[\textbf{\textcolor{blue}{Solution}}\\]}
+  {\end{proof}}
+\makeatletter
+  \renewcommand\@upn{\textit}
+\makeatother
+
+\newcommand{\lf}{\left}
+\newcommand{\rg}{\right}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem*{definition*}{Definition}
+
+\newtheorem{innercustomdefi}{Definition}
+\newenvironment{defi}[1]
+  {\renewcommand\theinnercustomdefi{#1}\innercustomdefi}
+  {\endinnercustomdefi}
+
+%\newtheorem{example}{Example}
+
+%\newtheorem{xca}[theorem]{Exercise}
+
+\newtheorem{innercustomex}{Example}
+\newenvironment{ex}[1]
+  {\renewcommand\theinnercustomex{#1}\innercustomex}
+  {\endinnercustomex}
+
+\theoremstyle{remark}
+
+
+%\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+
+\definecolor{hotpink}{rgb}{1.0, 0, 0.6}
+\definecolor{inter}{rgb}{0.4, 0.4, 1}
+\definecolor{awesome}{rgb}{1.0, 0.13, 0.32}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.60}
+\definecolor{darkgreen}{rgb}{0.0, 0.50, 0.0}
+\definecolor{darkyellow}{rgb}{0.80, 0.80, 0.0}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\rred}[1]{\textcolor{RubineRed}{#1}}
+\newcommand{\dblue}[1]{\textcolor{darkblue}{#1}}
+\newcommand{\dgreen}[1]{\textcolor{darkgreen}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\cyan}[1]{\textcolor{cyan}{#1}}
+\newcommand{\magenta}[1]{\textcolor{magenta}{#1}}
+\newcommand{\brown}[1]{\textcolor{brown}{#1}}
+\newcommand{\dyellow}[1]{\textcolor{darkyellow}{#1}}
+\newcommand{\am}[1]{\textcolor{Aquamarine}{#1}}
+
+\newcommand{\purple}[1]{\textcolor{purple}{#1}}
+
+\newcommand{\green}[1]{\textcolor{green}{#1}}
+\newcommand{\orange}[1]{\textcolor{orange}{#1}}
+
+\newcommand{\ot}{\otimes}
+\newcommand{\rh}{\rho}
+\newcommand{\tht}{\theta}
+\usepackage{answers}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage[margin=1in]{geometry} 
+
+\usepackage{braket}
+\usepackage{CJKutf8}
+\newcommand{\ob}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\iZ}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\W}{\mathcal{W}}
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\xra}[1]{\xrightarrow{#1}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\V}{\operatorname{Var}} 
+\newcommand {\tr} {\operatorname{Tr}}
+\newcommand{\trp}[1]{\tr\left(#1\right)}
+\newcommand{\trpp}[2]{\tr_{#1}\left(#2\right)}
+\newcommand{\trb}[1]{\tr\left[#1\right]}
+
+\newcommand*{\myfont}{\fontfamily{lmss}\selectfont}
+\DeclareTextFontCommand{\fo}{\myfont}
+
+%\usepackage{titlesec}
+
+\makeatletter
+%default definition of article.cls
+%using \renewcommand instead of \newcommand
+\renewcommand\part{%
+   \if@noskipsec \leavevmode \fi
+   \par
+   \addvspace{4ex}%
+   \@afterindentfalse
+   \secdef\@part\@spart}
+
+\def\@part[#1]#2{%
+    \ifnum \c@secnumdepth >\m@ne
+      \refstepcounter{part}%
+      \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
+    \else
+      \addcontentsline{toc}{part}{#1}%
+    \fi
+    {\parindent \z@ \raggedright
+     \interlinepenalty \@M
+     \normalfont
+     \ifnum \c@secnumdepth >\m@ne
+       \Large\bfseries \partname\nobreakspace\thepart
+       \par\nobreak
+     \fi
+     \huge \bfseries #2%
+     %%%\markboth{}{}\par}% removing redefinition of headings
+     \par}%
+    \nobreak
+    \vskip 3ex
+    \@afterheading}
+\def\@spart#1{%
+    {\parindent \z@ \raggedright
+     \interlinepenalty \@M
+     \normalfont
+     \huge \bfseries #1\par}%
+     \nobreak
+     \vskip 3ex
+     \@afterheading}
+\makeatother
+
+%\renewcommand{\partname}{Chapter}
+%\newcommand{\part}{\part}
+%\begin{comment}
+%\titleformat{\part}
+ % {\normalfont\myfont\huge\bfseries}
+  %{\parttitlename\ \thepart}{20pt}{\huge}
+%\end{comment}
+  
+  
+\usepackage{etoolbox}
+\patchcmd{\section}{\scshape}{\bfseries}{}{}
+\makeatletter
+\renewcommand{\@secnumfont}{\bfseries}
+\makeatother  
+  
+%\renewcommand{\thesection}{\arabic{section}}  
+
+
+
+\makeatletter
+\def\@seccntformat#1{%
+  \expandafter\ifx\csname c@#1\endcsname\c@section
+  \thesection\hspace{2ex}
+  \else
+  \csname the#1\endcsname\quad
+  \fi}
+\makeatother
+
+  
+\makeatletter  
+\renewcommand\partname{Chapter}
+\renewcommand\part{\@startsection{part}{0}%
+\z@{\linespacing\@plus\linespacing}{1\linespacing}%
+{\myfont\bfseries\huge\raggedright}}  
+\makeatother  
+  
+  
+
+% http://joshua.smcvt.edu/latex2e/bs-at-startsection.html  
+  
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}%
+{0pt}{.8\linespacing\@plus\linespacing}{.6\linespacing}%
+{\LARGE\bfseries\color{black}}}
+\makeatother
+
+\makeatletter
+\renewcommand\specialsection{\@startsection{specialsection}{1}%
+{0pt}{.8\linespacing\@plus\linespacing}{.6\linespacing}%
+{\LARGE\bfseries\color{hotpink}}}
+\makeatother
+
+\makeatletter
+\renewcommand\subsection{\@startsection{subsection}{2}%
+{0pt}{.8\linespacing\@plus.9\linespacing}{.7\linespacing}%
+{\Large\bfseries\color{black}}}
+\makeatother
+
+\makeatletter
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}%
+\z@{.6\linespacing\@plus.7\linespacing}{.4\linespacing}%
+{\large\bfseries\color{black}}}
+\makeatother
+
+%https://tex.stackexchange.com/questions/268706/amsart-change-subsection-headings-from-boldface-to-smallcaps
+%https://tex.stackexchange.com/questions/60437/newlines-after-section-headings-in-amsart
+%http://ftp.ktug.org/tex-archive/macros/latex/required/amscls/doc/amsclass.pdf 의 Line 1175
+
+%Since amsart.cls has
+%\def\subsection{\@startsection{subsection}{2}%
+%  \z@{.5\linespacing\@plus.7\linespacing}{-.5em}%
+%  {\normalfont\bfseries}}
+%you just add, in your document preamble (that is, before \begin{document}),
+%\makeatletter
+%\renewcommand\subsection{\@startsection{subsection}{2}%
+%  \z@{.5\linespacing\@plus.7\linespacing}{-.5em}%
+%  {\normalfont\scshape}}
+%\makeatother
+
+\newcommand{\subsec}[1]{\begin{adjustwidth}{-0.1in}{0in}\subsection{#1}\end{adjustwidth}}
+\newcommand{\subsect}[1]{\hspace{-0.2in}\subsection{#1}}
+\newcommand{\secc}[1]{\begin{adjustwidth}{-0.1in}{0in}\section{#1}\end{adjustwidth}}
+
+\usepackage{array}
+\preto\tabular{\setcounter{magicrownumbers}{0}}
+\newcounter{magicrownumbers}
+\newcommand\rownumber{\small\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
+
+
+\newcommand{\vb}{\vec{B}}
+\newcommand{\vj}{\vec{j}}
+\newcommand{\vn}{\vec{\nabla}}
+\newcommand{\vr}{\mathbf{r}}
+\newcommand{\vk}{\mathbf{k}}
+\newcommand{\va}{\vec{A}}
+\newcommand{\vl}{\vect{l}}
+\newcommand{\vp}{\varphi}\newcommand{\hvp}{\hat{\varphi}}
+\setcounter{section}{+0}
+
+\newcommand{\hq}{\hat{Q}}
+\newcommand{\hp}{\hat{\Phi}}
+
+\newcommand{\ha}{\hat{a}}
+\newcommand{\hN}{\hat{N}}
+\newcommand{\ld}{\lambda}
+\newcommand{\htp}{\hat{p}}
+
+\newcommand{\om}{\omega}
+\newcommand{\var}{\operatorname{Var}}
+\newcommand{\vect}{\mathbf}
+\newcommand{\nul}{\operatorname{Nul}}
+\newcommand{\col}{\operatorname{Col}}
+\newcommand{\row}{\operatorname{Row}}
+\newcommand{\dg}{\dagger}
+%    Blank box placeholder for figures (to avoid requiring any
+%    particular graphics capabilities for printing this document).
+\newcommand{\blankbox}[2]{%
+  \parbox{\columnwidth}{\centering
+%    Set fboxsep to 0 so that the actual size of the box will match the
+%    given measurements more closely.
+    \setlength{\fboxsep}{0pt}%
+    \fbox{\raisebox{0pt}[#2]{\hspace{#1}}}%
+  }%
+}
+
+
+
+\usepackage{bbm}
+%     If your article inludes graphics, uncomment this command
+\usepackage{svg}
+\usepackage[super, square]{natbib}
+%\usepackage[square]{natbib}
+
+%\usepackage{biblatex}
+%\bibliography{name.bib}
+\svgsetup{inkscapelatex=false}
+\usepackage{epstopdf}
+\usepackage{url}
+%\usepackage{circuitikz}
+
+\usepackage{pgf}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+
+\usepackage{gnuplottex}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{external} 
+\usetikzlibrary{external}
+%\tikzexternalize[prefix=tikz/]
+
+
+%\pgfplotsset{every axis/.append style={
+                    %axis x line=middle,    % put the x axis in the middle
+                    %axis y line=middle,    % put the y axis in the middle
+                    %axis line style={<->,color=blue}, % arrows on the axis
+                    %xlabel={$x$},          % default put x on x-axis
+                    %ylabel={$y$},          % default put y on y-axis
+            %}}
+\pgfplotsset{every tick label/.append style={font=\tiny}}
+\pgfplotsset{every x tick label/.append style={font=\tiny, yshift=0.5ex}}
+\pgfplotsset{every y tick label/.append style={font=\tiny, xshift=0.5ex}}
+\pgfplotsset{ /pgf/number format/precision=10}
+
+\begin{comment}
+
+\pgfplotsset{
+    node near coord/.style={ % Style for activating the label for a single coordinate
+        nodes near coords*={
+            \ifnum\coordindex=#1\pgfmathprintnumber{\pgfplotspointmeta}\fi
+        }
+    },
+    nodes near some coords/.style={ % Style for activating the label for a list of coordinates
+        scatter/@pre marker code/.code={},% Reset the default scatter style, so we don't get coloured markers
+        scatter/@post marker code/.code={},% 
+        node near coord/.list={#1} % Run "node near coord" once for every element in the list
+    }
+}
+
+\pgfplotsset{
+    node near coord/.style={ % Style for activating the label for a single coordinate
+        nodes near coords*={
+            \ifnum\coordindex=#1\pgfmathprintnumber{\pgfplotspointmeta}\fi
+        }
+    },
+    nodes near some coords/.style={ % Style for activating the label for a list of coordinates
+        scatter/@pre marker code/.code={},% Reset the default scatter style, so we don't get coloured markers
+        scatter/@post marker code/.code={},% 
+        node near coord/.list={#1} % Run "node near coord" once for every element in the list
+    }
+}
+
+\pgfplotsset{
+    node near coord/.style args={#1/#2/#3}{% Style for activating the label for a single coordinate
+        nodes near coords*={
+            \ifnum\coordindex=#1 #2\fi
+        },
+        scatter/@pre marker code/.append code={
+            \ifnum\coordindex=#1 \pgfplotsset{every node near coord/.append style=#3}\fi
+        }
+    },
+    nodes near some coords/.style={ % Style for activating the label for a list of coordinates
+        scatter/@pre marker code/.code={},% Reset the default scatter style, so we don't get coloured markers
+        scatter/@post marker code/.code={},% 
+        node near coord/.list={#1} % Run "node near coord" once for every element in the list
+    }
+
+}
+
+\pgfplotsset{
+    node near coord/.style args={#1/#2/#3}{% Style for activating the label for a single coordinate
+        nodes near coords*={
+            \ifnum\coordindex=#1  #2\fi
+        },
+        scatter/@pre marker code/.append code={
+            \ifnum\coordindex=#1 \pgfplotsset{every node near coord/.append style=#3}\fi
+        }
+    },
+    nodes near some coords/.style={ % Style for activating the label for a list of coordinates
+        scatter/@pre marker code/.code={},% Reset the default scatter style, so we don't get coloured markers
+        scatter/@post marker code/.code={},% 
+        node near coord/.list={#1} % Run "node near coord" once for every element in the list
+    }
+
+}
+
+\end{comment}
+
+
+
+
+
+\pgfplotsset{
+    node near coord/.style args={#1/#2/#3}{% Style for activating the label for a single coordinate
+        nodes near coords*={
+            \ifnum\coordindex=#1\pgfmathprintnumber{\pgfplotspointmeta}#2\fi
+        },
+        scatter/@pre marker code/.append code={
+            \ifnum\coordindex=#1 \pgfplotsset{every node near coord/.append style=#3}\fi
+        }
+    },
+    nodes near some coords/.style={ % Style for activating the label for a list of coordinates
+        scatter/@pre marker code/.code={},% Reset the default scatter style, so we don't get coloured markers
+        scatter/@post marker code/.code={},% 
+        node near coord/.list={#1} % Run "node near coord" once for every element in the list
+    }
+}
+
+
+\pgfplotsset{
+    pin near coord/.style args={#1/#2/#3}{% Style for activating the label for a single coordinate
+        scatter/@pre marker code/.append code={
+           \ifnum 1=#3
+            \ifnum\coordindex=#1  point meta=x, \node[pin={#2:\small\color{black} \SI{\small\pgfmathprintnumber{\pgfplotspointmeta}}{\volt}  }]{};\fi 
+            \fi 
+            \ifnum 2=#3
+            \ifnum\coordindex=#1 point meta=x, \node[pin={[align=center]75:#2}]{};\fi
+            \fi
+        }
+    },
+    pins near some coords/.style={ % Style for activating the label for a list of coordinates
+        scatter,
+        scatter/@pre marker code/.code={},% Reset the default scatter style, so we don't get coloured markers
+        scatter/@post marker code/.code={},% 
+        pin near coord/.list={#1} % Run "pin near coord" once for every element in the list
+    }
+}
+\pgfplotsset{select coords between index/.style 2 args={
+    x filter/.code={
+        \ifnum\coordindex<#1\def\pgfmathresult{}\fi
+        \ifnum\coordindex>#2\def\pgfmathresult{}\fi
+    }
+}}
+%\usetikzlibrary {math, fpu}
+%\pgfkeys{/pgf/fpu = true}
+\usepackage{csvsimple}
+\usepackage{ifpdf}
+\usepackage{sidecap}
+\usepackage{float}
+\usepackage[labelformat=simple]{subcaption}
+\renewcommand{\thesubfigure}{(\scshape\Alph{subfigure})}
+\captionsetup[subfigure]{position=top}
+\begin{comment}
+\usepackage[labelformat=simple]{subcaption}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+(Note: Since parens is the default label format you will get double parentheses in sub-captions if you don't specify a different label format, e.g., simple.)
+\end{comment}
+%\renewcommand\thesubfigure{(\alph{subfigure})}
+\newcommand{\squeezeup}{\vspace{-5mm}}
+\newcommand{\squeezeupp}{\vspace{-8.5mm}}
+\newcommand{\squeezeuppp}{\vspace{-10mm}}
+%\usepackage{pgfplots}
+   % \usetikzlibrary{intersections}
+    % use this `compat' level or higher so that TikZ coordinates don't have to be prefixed
+    % with `axis cs:'
+   %\pgfplotsset{width=15cm,compat=1.11}
+
+\usepackage{siunitx}\sisetup{parse-numbers=false}
+\sisetup{parse-numbers=false}
+\DeclareSIUnit\torr{torr}
+\DeclareSIUnit\gauss{G}
+\usepackage{amsmath}
+\usepackage{amsthm,amssymb}
+
+\makeatletter
+\def\convertto#1#2{\strip@pt\dimexpr #2*65536/\number\dimexpr 1#1}
+\makeatother
+
+\usepackage{mhchem}%
+\usepackage{chemformula}
+\let\ce\ch
+\usepackage{longtable}
+\usepackage{multirow, makecell}
+\usepackage{multicol}
+\begin{comment}
+
+\makeatletter
+\renewenvironment{thebibliography}[1]
+     {\begin{multicols}{2}[\section*{\refname}]%
+      \@mkboth{\MakeUppercase\refname}{\MakeUppercase\refname}%
+      \list{\@biblabel{\@arabic\c@enumiv}}%
+           {\settowidth\labelwidth{\@biblabel{#1}}%
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+            \@openbib@code
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}
+     {\def\@noitemerr
+       {\@latex@warning{Empty `thebibliography' environment}}%
+      \endlist\end{multicols}}
+\makeatother
+%\url{tex.stackexchange.com/questions/20758/bibliography-in-two-columns-section-title-in-one/20761}
+\end{comment}
+%\renewcommand{\bibpreamble}{\begin{multicols}{2}}
+%\renewcommand{\bibpostamble}{\end{multicols}}
+\usepackage{helvet}
+
+\usepackage{blindtext}
+\usepackage{mathtools}
+%\usepackage[x11names]{xcolor}
+%\newtagform{blue}{\color{blue}(}{)}
+%\usepackage[dvipsnames]{xcolor}
+
+\definecolor{awesome}{rgb}{1.0, 0.13, 0.32}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.60} 
+
+
+\newcommand{\re}{\operatorname{Re}}
+%\newcommand{\im}{\operatorname{Im}}
+\newcommand{\im}{\implies}
+
+%\newcommand{\redheart}{\textcolor{red}{$\varheartsuit$}}
+%\newcommand{\heart}{\ensuremath\varheartsuit}
+
+
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+% use KoTeX package for Korean 
+\usepackage{kotex}
+
+
+
+
+
+
+%\numberwithin{equation}{section}
+
+\usepackage{answers}
+\usepackage{setspace}
+
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{mathrsfs}
+\usepackage[margin=1in]{geometry} 
+\usepackage{changepage}
+\usepackage{braket}
+\usepackage{CJKutf8}
+
+
+\DeclareTextFontCommand{\fo}{\myfont}
+
+\newcommand*{\helve}{\fontfamily{phv}\selectfont}
+\DeclareTextFontCommand{\fohe}{\helve}
+
+\makeatletter
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+
+\begin{comment}
+\newcommand{\vb}{\vec{B}}
+\newcommand{\vj}{\vec{j}}
+\newcommand{\vn}{\vec{\nabla}}
+\newcommand{\vr}{\mathbf{r}}
+\newcommand{\vk}{\mathbf{k}}
+\newcommand{\va}{\vec{A}}
+\newcommand{\vl}{\vect{l}}
+\newcommand{\vp}{\varphi}\newcommand{\hvp}{\hat{\varphi}}
+\setcounter{section}{+11}
+
+\newcommand{\hq}{\hat{Q}}
+\newcommand{\hp}{\hat{\Phi}}
+
+\newcommand{\ha}{\hat{a}}
+\newcommand{\hN}{\hat{N}}
+\newcommand{\ld}{\lambda}
+\newcommand{\htp}{\hat{p}}
+%\usepackage[T1]{fontenc}
+%\usepackage{bold-extra}
+\newcommand{\var}{\operatorname{Var}}
+\newcommand{\vect}{\mathbf}
+\newcommand{\nul}{\operatorname{Nul}}
+\newcommand{\col}{\operatorname{Col}}
+\newcommand{\row}{\operatorname{Row}}
+\newcommand{\dg}{\dagger}
+\end{comment}
+\usepackage{fancyhdr}
+\usepackage{regexpatch}
+
+\begin{comment}
+%%% let's patch the amsart macros
+\makeatletter
+\renewcommand{\sectionmark}[2]{%
+  \ifnum#1<\@m
+    \markboth{\thesection. #2}{\thesection. #2}%
+  \else
+    \markboth{#2}{#2}%
+  \fi}
+\xpatchcmd*{\@sect}
+  {\@tocwrite}
+  {\csname #1mark\endcsname{#2}{#7}\@tocwrite}
+  {}{}
+\makeatother
+\end{comment}
+
+\pagestyle{fancy}
+\fancyhf{}
+%\rhead{}
+\lhead{ }
+%\fancyhead[L]{\rightmark}
+\fancyhead[R]{\textcolor{black}{\thepage}}
+
+%\renewcommand{\subsectionmark}[1]{%
+%  \markright{\MakeUppercase{\thesubsection.\ #1}}}%
+
+%\renewcommand{\sectionmark}[1]{%
+%\markboth{\thesection\quad #1}{}}
+%\fancyhead{}
+%\fancyfoot[L]{\leftmark}
+%\fancyfoot{}
+%\fancyfoot[CE,CO]{\leftmark}
+\cfoot{\thepage}
+\newlength\FHoffset
+\setlength\FHoffset{0.12in}
+
+\addtolength\headwidth{2\FHoffset}
+
+\fancyheadoffset{\FHoffset}
+
+\usepackage{layouts}
+
+
+
+\setcounter{tocdepth}{3}% to get subsubsections in toc
+
+\let\oldtocsection=\tocsection
+
+\let\oldtocsubsection=\tocsubsection
+
+\let\oldtocsubsubsection=\tocsubsubsection
+
+\renewcommand{\tocsection}[2]{\hspace{0em}\oldtocsection{#1}{#2}}
+\renewcommand{\tocsubsection}[2]{\hspace{1em}\oldtocsubsection{#1}{#2}}
+\renewcommand{\tocsubsubsection}[2]{\hspace{2em}\oldtocsubsubsection{#1}{#2}}
+\renewcommand{\contentsname}{Table of Contents}
+
+\begin{document}
+%\pgfset{fpu = true}
+\usetagform{blue} \reqnomode
+\newgeometry{left=0.9in, right=0.9in, top=1in, bottom=1in}
+%\newgeometry{left=0.7in, right=0.7in, top=1in, bottom=1in}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \lhead{ }
+  \chead{}
+  \rhead{\textcolor{black}{\thepage}}
+}
+
+\begin{center}
+\linebreakc
+\linebreakc
+\linebreakc
+\huge
+%\textbf{\fo{ EXP 1.}}
+
+\textbf{Pharmacology Summary}
+
+\textcolor{white}{bl}\\
+
+\Large
+
+Gyunghee Han
+
+\end{center}
+
+\textcolor{white}{bl}\\
+
+\normalsize
+
+\renewcommand{\contentsname}{\normalfont \bfseries \Large Table of Contents}
+\tableofcontents
+
+\section{Pharmacokinetics}
+
+\section{Absorption}
+\subsection{Bioavailability \& Plasma Concentration}
+\SI{100}{mg} 경구투여, bioavailability 10\%일때 plasma concentration?
+\begin{align*}
+    \frac{\SI{100}{mg} \times 0.1 }{\SI{2.5}{L}}
+= \SI{4}{mg/L}    
+\end{align*}
+\subsection{흡수에 영향주는 요소 }
+
+    \subsubsection{ 약물의 물리화학적 성질} 
+    \subsubsection{생리적 성질 }
+    \subsubsection{ 투여 경로 }
+    \begin{enumerate}
+        \item oral
+        
+        \item sublingual 
+        장점: avoids 1st-pass metabolism, quick absorption, rapid onset
+        
+        단점 : only small dose, only lipid soluble
+        
+        \item rectal
+        
+        장점 : infants, vomiting, unconscious, 1st-pass avoided in 1/3 of dose
+        
+        단점 : erratic, unpredictable, inconvenient
+        \item iv
+        \item im
+        \item sc
+        
+        drug deposited in subcutaenous fat tissue 
+        
+        ex) insulin, tuberculosis test, skin allergy test
+        
+        장점 : slower, more constant absorption \textit{\textbf{than IM }}, longer action (subcutatenous fat tissue is a reservoir of druc), self injectable
+        
+        단점 : \textit{most allergenic}
+        \item inhalation
+        
+        장점 : quick absorption, rapid onset 
+        
+        단점 : direct delivery to heart 
+        
+        
+        \item transdermal
+        \item topical
+    \end{enumerate}
+
+
+\section{Distribution : \textit{reversible}, to extravascular}
+Dispersion of drug throughout fluids and tissues of the 
+body
+
+the process of reversible transfer of a drug to and from the site of measurement (vascular compartment) and the peripheral tissues  (extra-vascular compartment)
+\subsection{$V_d$ (Apparent) Volume of Distribution}
+약물이 분포하는 가상의 용적
+
+어떤 특정한 체액에서 농도가 관찰되었을 때 그만한 양을 담을 수 있는 시스템의
+이론적인 부피 크기
+
+
+\begin{align*}
+\text{plasma 농도}
+\ \ = \ \ \frac{\text{흡수량}}{  V_d} \ \ = \ \ \frac{\text{투여량 }\ \cdot \ \text{ bioavailability }}{ V_d }
+\end{align*}
+\SI{100}{mg} 경구투여, bioavailability 10\%, $\displaystyle V_d = \SI{10}{L}$일때 plasma 농도는?
+\begin{align*}
+\text{plasma 농도}
+\ \ = \ \  
+\frac{\SI{100}{mg}\ \cdot \ 0.1}{\SI{10}{L}}
+\ \ = \ \ \SI{1}{mg/L}
+\end{align*}
+\begin{equation}
+V_d \ \ = \ \ \frac{\text{흡수량 } A }{C_\text{plasma}}   \label{eq:AVdC} 
+\end{equation}
+\SI{10}{mg} IV투여, 혈중농도 측정시 \SI{50}{\micro\gram/L}였다.  $V_d$는? 
+\begin{align*}
+V_d \ \ = \ \ \frac{\SI{10}{mg} }{\SI{50}{\micro\gram/L}}     \ \ = \ \ \SI{200}{L}
+\end{align*}
+Plasma 내에 존재하는 약물의 양은? ($\displaystyle \neq $ 흡수량!!!) 
+
+약물이 plasma내에만 존재하는 것이 아니므로!!!
+
+\begin{align*}
+\text{plasma내의 약물양 } A_\text{plasma}\ \ = \ \ C_\text{plasma} \ \cdot \ V_\text{plasma}    
+\end{align*}
+\begin{align*}
+\SI{50}{\micro\gram/L} \ \cdot \ \SI{2.5}{L}    
+\end{align*}
+
+\section{Elimination $\displaystyle=$ Metabolism $+$ Excretion}
+\subsection{Clearance 청소율}
+
+\section{Metabolism : \textit{irreversible} }
+\textit{\textbf{Irreversible}} transformation of parent compounds 
+into daughter compounds
+
+\subsection{Sites of Drug Metabolism}
+Major Site : Liver
+
+Secondary Sites : Intestine, Kidney (proximal), Lung
+\subsection{hepatic clearance}
+
+\begin{align*}
+\text{hepatic clearance }
+CL_H \ = \ Q_H \ \cdot  \ 
+\frac{f_u\cdot CL_\text{int}}{Q_H \ + \ f_u\cdot CL_\text{int}}
+\end{align*}
+\subsection{Extraciton Ratio}
+\begin{align*}
+0 \ \leq\ \  
+\text{Extraction Ratio}    \ = \ \frac{f_u\cdot CL_\text{int}}{Q_H \ + \ f_u\cdot CL_\text{int}} \ \ \leq  \ 1 
+\end{align*}
+\begin{align*}
+\text{hepatic clearance} CL_H \ = \ Q_H \cdot \text{ Extraction Ratio }    
+\end{align*}
+\begin{enumerate}
+    \item High 
+\end{enumerate}
+\section{Excretion : \textit{irreversible}}
+\textbf{\textit{Irreversible transfer }} from the systemic circulation into 
+\textbf{extracorporal} fluids (urine or bile)
+
+Drugs that are excreted in the urine or bile are 
+\textbf{\textit{hydrosoluble}}. 
+
+• \textit{\textbf{Lipophilic}} drugs cannot be excreted before \textit{\textbf{metabolism into more polar} }
+compounds
+
+
+Sites of Excretion : Kidney, Liver
+\subsection{Renal Excretion}
+\subsubsection{Glomerular Filtration (사구체 여과)}
+\subsubsection{Tubular Secrtion (근위 분비)}
+ Predominant in the proximal tubule (근위 세뇨관)
+ 
+  Mainly by transporters. E.g. P-glycoprotein, MRPs, OATs, OCTs, etc.
+ 
+\subsection{Biliary Excretion}
+By means of transport systems :
+
+
+\section{Pharmacokinetic Parameters}
+\subsection{Primary : F, $V_d$, CL}
+\subsection{Secondary : $k_e$, $t_\frac{1}{2}$}
+
+\section{Pharmacokinetic Model}
+\subsection{Compartment Model}
+\subsubsection{Central : blood, heart, lung, liver, kidney}
+\subsubsection{Peripheral : fat tissue, muscle tissue }
+\subsubsection{Special : CSF, CNS}
+
+\subsection{$C_\text{plasma} - t$ curve}
+\subsection{Elimination Kinetics}
+
+
+\subsubsection{0th order elimination : 등속 }
+ 약물제거 속도(시간에 따른 약물양의 감
+소정도)가 약물의 양(농도)과 무관하게
+일정
+\subsubsection{1st order elimination : $ \text{제거속도} \propto \text{약물농도}$ : 약물이 시간당 일정한 비율로 감소}
+
+약물제거속도(시간에 따른 약물양의 감
+소정도)가 일정하지 않고 약물의 양(농
+도)에 비례
+
+
+대부분의 약물이 elimination 이 1st
+order elimination 
+
+$t_\frac{1}{2}$이 일정
+
+\subsubsection{Equations (1st order)}
+
+\begin{align*}
+C(t) \ = \ C(0) \cdot e^{-k\cdot t}
+\end{align*}
+\begin{align*}
+\lnp{C(t)} \ 
+= \ \lnp{C(0)} \ - \ k\cdot t 
+\end{align*}
+where $\displaystyle k = \text{elimination rate constant or fractional rate of elimination} $ [\si{h^{-1}}] 
+
+Relationship between $k$ and $t_\frac{1}{2}$ : 
+\begin{align*}
+    k\cdot t \ = \ \lnp{C(0)} - \lnp{C(t)} = \lnp{\frac{C(0)}{C(t)} }
+\end{align*}
+Therfore, 
+\begin{align*}
+t_\frac{1}{2} \ = \ \frac{\ln2}{k}    
+\end{align*}
+\subsubsection{Rate of Elimination (1st order)}
+\begin{align*}
+\text{Rate of Elimination } (\si{mg/h})
+\ \ = \ \ k (\si{h^{-1}}) \ \cdot \ A (\si{mg})
+\end{align*}
+where $A : \text{amount present in body}$ and $k : \text{elimination rate constant} $
+\begin{align*}
+\text{Rate of Elimination } (\si{mg/h})
+\ \ = \ \ C (\si{mg/L}) \ \cdot \ CL (\si{L/h})    
+\end{align*}
+where $C : $ drug concentration and $CL : $ clearance 청소율 
+\begin{align*}
+\text{Rate of Elimination } (\si{mg/h})
+\ \ &= \ \ Q (\si{L/h}) \ \cdot \ (C_\text{in} - C_\text{out}) (\si{mg/L}) \\
+&= \ \ Q (\si{L/h}) \ \cdot \ C \ \cdot \ \underbrace{\frac{(C_\text{in} - C_\text{out})}{C}}_{E}  \\
+&= \underbrace{Q \ \cdot \ E}_{CL} \ \cdot \ C \\
+&= CL \ \cdot \ C 
+\end{align*}
+\subsubsection{$k$, $CL$, $V_d$ 관계 : $\displaystyle k = \frac{CL}{V_d}$ }
+\begin{align*}
+CL\cdot C = k \cdot A \\
+\implies
+k \ = \ \frac{CL\cdot C}{\blue{A}}     
+= \frac{CL\cdot C}{\blue{V_d\cdot C} }
+= \frac{CL}{V_d}
+\end{align*}
+in second equality we used the fact that $\displaystyle \text{흡수량 }A = V_d \cdot C_\text{plasma}$ by \cref{eq:AVdC} $\displaystyle V_d = \frac{\text{흡수량} A}{C_\text{plasma}} $
+\subsubsection{AUC (Area Under the Curve) }
+\begin{align*}
+    AUC = \int_0^\infty dt\  C(t)
+\end{align*}
+\subsubsection{약물농도 증가속도  = infusion 속도 - 제거속도 }
+약물농도증가속도 = infusion속도 - 제거속도 
+= $R_0 - k\cdot A = R_0 - CL\cdot C$
+
+
+Infusion 속도=제거속도인
+시점에 약물농도
+일정하게 유지됨
+
+
+Plateau 도달시간
+• Continuous infusion시 농도가 plateau에 도달하는 시간은 투여한
+약물양이나 얼마나 자주 약물을 투여했는지 와는 무관하고 약
+물의 반감기와 관련되어 있다.
+
+\section{Multiple Dosage Regimen }
+\subsection{Plasma Concentration $C_\text{plasma}(t)$ following multiple-dose regimen ( $C_{\max, N}$, $C_{\min,N}$) }
+
+$\tau$의 시간간격으로 반복투여시 
+\begin{align*}
+C_{\max, N}
+&= C_{\max, 1} \ \cdot \ 
+\lf[1 + e^{-k\tau}+ e^{-2k\tau}+ e^{-3k\tau}+\cdots + + e^{-(N-1)k\tau} \rg]\\
+&= \magenta{C_{\max, 1}} \ \cdot \
+\frac{1-e^{-Nk\tau}}{1-e^{-k\tau}} \\
+&=\magenta{\frac{Dose}{V_d}  } \ \cdot \
+\frac{1-e^{-Nk\tau}}{1-e^{-k\tau}}
+\end{align*}
+(질문) magenta 왜 equal???
+\begin{align*}
+C_{\min, N} \ = \ C_{\max, N} \cdot e^{-k\tau}    
+\end{align*}
+\subsection{Steady State}
+
+들어오는 속도 == 제거되는 속도 
+
+rate in == rate out
+
+농도가 일정하게 유지됨 
+
+\subsubsection{항정상태에서 $C_{\max, ss} $ \& $C_{\min,ss}$ }
+
+\begin{align*}
+e^{-Nk\tau} = 0     
+\end{align*}
+(질문) 위 왜 성립??
+\begin{align*}
+C_{\max,N} \ =\  \frac{Dose}{V_d}\cdot\frac{1-e^{-Nk\tau}}{1-e^{-k\tau}}
+\end{align*}
+Steady state approximation : \blue{$e^{-Nk\tau}\simeq 0$ }
+\begin{align*}
+    C_{\max, SS} \ &=\   \frac{Dose}{V_d}\cdot
+    \frac{ 1-  \underbrace{ \blue{e^{-Nk\tau}} }_{ \substack { \blue{\simeq 0}\\ \text{ by ss approx} }} } {1-e^{-k\tau}} \\
+\     &\simeq \ \frac{Dose}{V_d}\frac{1}{1-e^{-k\tau}}
+\end{align*}
+\begin{align*}
+    C_{\min, ss} = C_{\max, ss} \cdot e^{-k\tau}
+\end{align*}
+\subsubsection{항정상태의 Average Level}
+\begin{align*}
+C_{av, ss} \cdot \tau \ = \ AUC_\tau    \ = \ \frac{Dose}{CL}
+\end{align*}
+(질문) 왜 $Dose= CL\cdot AUC_\tau$ 성립??? 
+\subsubsection{Accumulation Index}
+최초투여대비 반복투여에 의해 항정상태에 이르렀을 때의 농도
+(amount)의 증가분 
+\begin{align*}
+C_{\max, ss} = C_{\max,1}\ \cdot \ \underbrace{\frac{1}{1-e^{-k\tau}}}_{\text{Accumulation Index}}
+\end{align*}
+투여간격이 짧고 반감기 길수록 acculmulation 많이 됨
+
+\section{Kinetics Following an ExtraVascular Dose} 
+\section{Changes in Pharmacokinetic Parameters}
+\subsection{Changes in $V_d$}
+\subsection{Changes in $CL$}
+
+
+
+
+\section{외워야할 식}
+\begin{align*}
+    k_e \ = \ \frac{CL}{V_d}
+\end{align*}
+\begin{align*}
+    t_\frac{1}{2} \ = \ \frac{\ln2}{k_e}
+\end{align*}
+\begin{align*}
+Dose \ = \ CL \cdot AUC    
+\end{align*}
+\begin{align*}
+\frac{AR}{A}
+\ = \ -\frac{1}{K_d}\cdot \lf( [R]_\text{tot}\rg) 
+\end{align*}
+Scatchard plot 으로 알 수 있는 것 : 친화도 (기울기), 총수용체개수(y절편), 수용체종류, 결합수  
+
+
+
+염기성 약물은 염기성 환경에서 비이온화 형태라서 흡수 잘 된다. 
+
+비이온화 형태 $\implies$ 흡수잘됨 
+
+약알칼리 약물은 소장에서 비이온화도가 높으므로 소장에서 흡수가 잘된다. (jejunum pH7.5-8.0) 210510 2교시 약리학서론,약물수용체,효능 신찬영교수님 17pg (얌첵) 
+
+
+CL의 단위 \si{mg/h}가 아니라 \si{L/h}  단위시간당 양이 아니라 \textit{단위시간당 \textbf{부피}}이다 !!!!
+
+
+\section{0427 1}
+
+\begin{equation}
+    I \  = \ G_K \times (V_m - E_K)
+\end{equation}
+$G_K$ : 얼마나 많이 열려있는지 
+
+activation curve : $G_K$ - membrane potential curve 
+
+막전압-gated curve
+
+activation될 확률 ($G_K$)가 전압이 depol되면 될수록 커진다. 
+
+hyperpol쪽에서는 0,
+
+depol쪽에서는 1이되는 
+
+S자 모양의 함수이다. 
+
+
+voltage-clamp 실험 : voltage에 따라 얼마나 activation 되는지 보는 실험 
+
+
+2번은 관심있으면 보면됨 
+
+3번은 잘 알아야함 
+
+
+\end{document}
