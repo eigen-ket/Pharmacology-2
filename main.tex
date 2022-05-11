@@ -890,15 +890,17 @@ Gyunghee Han
 
 \section{Absorption}
 \subsection{Bioavailability \& Plasma Concentration}
-\SI{100}{mg} 경구투여, bioavailability 10\%일때 plasma concentration?
+\SI{100}{mg} 경구투여, \blue{bioavailability 10\%}일때 plasma concentration?
 \begin{align*}
-    \frac{\SI{100}{mg} \times 0.1 }{\SI{2.5}{L}}
+    \frac{\SI{100}{mg} \times \blue{0.1} }{\SI{2.5}{L}}
 = \SI{4}{mg/L}    
 \end{align*}
 \subsection{흡수에 영향주는 요소 }
 
-    \subsubsection{ 약물의 물리화학적 성질} 
-    \subsubsection{생리적 성질 }
+    \subsubsection{ 약물의 물리화학적 성질 (2018-44)} 
+    \subsubsection{생리적 성질 (2018-44) }
+    위장관 운동성 
+    %(질문) gastric motility와 exposure time은 양의 상관? 음의 상관?
     \subsubsection{ 투여 경로 }
     \begin{enumerate}
         \item oral
@@ -947,6 +949,7 @@ the process of reversible transfer of a drug to and from the site of measurement
 어떤 특정한 체액에서 농도가 관찰되었을 때 그만한 양을 담을 수 있는 시스템의
 이론적인 부피 크기
 
+흡수된 (\textbf{\textit{bioavailable}} 한) 약물이 $C_p$로 \textit{\textbf{균일하게}} 분포한다고 가정했을때 분포하는 부피
 
 \begin{align*}
 \text{plasma 농도}
@@ -991,7 +994,7 @@ Secondary Sites : Intestine, Kidney (proximal), Lung
 \subsection{hepatic clearance}
 
 \begin{align*}
-\text{hepatic clearance }
+\text{hepatic clearance }\ 
 CL_H \ = \ Q_H \ \cdot  \ 
 \frac{f_u\cdot CL_\text{int}}{Q_H \ + \ f_u\cdot CL_\text{int}}
 \end{align*}
@@ -1001,10 +1004,37 @@ CL_H \ = \ Q_H \ \cdot  \
 \text{Extraction Ratio}    \ = \ \frac{f_u\cdot CL_\text{int}}{Q_H \ + \ f_u\cdot CL_\text{int}} \ \ \leq  \ 1 
 \end{align*}
 \begin{align*}
-\text{hepatic clearance} CL_H \ = \ Q_H \cdot \text{ Extraction Ratio }    
+\text{hepatic clearance } CL_H \ = \ Q_H \cdot \text{ Extraction Ratio }    
 \end{align*}
-\begin{enumerate}
-    \item High 
+\begin{enumerate}[label={\bf Case {\arabic*.}}]
+    \item High Extraction Ratio 
+    
+    \begin{align*}
+f_u\cdot CL_\text{int} \gg Q_H \ \implies \  
+\frac{f_u\cdot CL_\text{int}}{Q_H + f_u\cdot CL_\text{int}}\simeq 1 \ \implies  \ 
+ CL_H  \simeq Q_H
+    \end{align*}
+    
+    \begin{itemize}
+        \item examples : morphine, propranolol, lidocaine 
+        
+        \item 간 혈류량 $Q_H$에 의해 $CL_H$가 결정된다. 
+        
+        
+    \end{itemize}
+    \item Low Extraction Ratio
+        \begin{align*}
+f_u\cdot CL_\text{int} \ll Q_H \ \implies \  
+\frac{Q_H}{Q_H + f_u\cdot CL_\text{int}}\simeq 1 \ \implies  \ 
+ CL_H  \simeq f_u\cdot CL_\text{int}
+    \end{align*}
+    
+    \begin{itemize}
+        \item examples : phenytoin, dizsepam, salicylic acid, valproic acid, waparin, carbamazepine 
+        \item 
+        $CL_\text{int} $: intrinsinc clearance : metabolizing enzyme activity에 의해 $CL_H$가 결정된다. 
+    \end{itemize}
+    
 \end{enumerate}
 \section{Excretion : \textit{irreversible}}
 \textbf{\textit{Irreversible transfer }} from the systemic circulation into 
@@ -1017,13 +1047,13 @@ Drugs that are excreted in the urine or bile are
 compounds
 
 
-Sites of Excretion : Kidney, Liver
+• Sites of Excretion : Kidney, Liver
 \subsection{Renal Excretion}
 \subsubsection{Glomerular Filtration (사구체 여과)}
 \subsubsection{Tubular Secrtion (근위 분비)}
  Predominant in the proximal tubule (근위 세뇨관)
  
-  Mainly by transporters. E.g. P-glycoprotein, MRPs, OATs, OCTs, etc.
+  Mainly by transporters. e.g. P-glycoprotein, MRPs, OATs, OCTs, etc.
  
 \subsection{Biliary Excretion}
 By means of transport systems :
@@ -1074,10 +1104,12 @@ Relationship between $k$ and $t_\frac{1}{2}$ :
 \begin{align*}
     k\cdot t \ = \ \lnp{C(0)} - \lnp{C(t)} = \lnp{\frac{C(0)}{C(t)} }
 \end{align*}
-Therfore, 
+Therefore, 
 \begin{align*}
 t_\frac{1}{2} \ = \ \frac{\ln2}{k}    
 \end{align*}
+($k$ 와 $t$를 곱한게  $\expp{ \ }$안에 들어가니까 $k \cdot t$가 무차원량이어야함. 
+그러니까 $\displaystyle k\cdot t_\frac{1}{2} \ = \ \ln2  $라고 외우면 쉽게 반감기 공식 외울 수 있음.)
 \subsubsection{Rate of Elimination (1st order)}
 \begin{align*}
 \text{Rate of Elimination } (\si{mg/h})
@@ -1105,21 +1137,36 @@ k \ = \ \frac{CL\cdot C}{\blue{A}}
 = \frac{CL}{V_d}
 \end{align*}
 in second equality we used the fact that $\displaystyle \text{흡수량 }A = V_d \cdot C_\text{plasma}$ by \cref{eq:AVdC} $\displaystyle V_d = \frac{\text{흡수량} A}{C_\text{plasma}} $
+
+\subsubsection{AUC, CL, Dose relationship}
+\begin{align*}
+\text{instant rate of elimination } = CL \cdot C
+\end{align*}
+Integrating both sides of above equation (assuming constant $CL$), we get :
+\begin{align*}
+\text{ amount eliminated in interval }[t_1,\ t_2] \ = \ 
+CL\cdot \int_{t_1}^{t_2} dt \ C(t)
+\ = \ CL\cdot AUC
+\end{align*}
 \subsubsection{AUC (Area Under the Curve) }
 \begin{align*}
     AUC = \int_0^\infty dt\  C(t)
 \end{align*}
 \subsubsection{약물농도 증가속도  = infusion 속도 - 제거속도 }
-약물농도증가속도 = infusion속도 - 제거속도 
-= $R_0 - k\cdot A = R_0 - CL\cdot C$
+\begin{align*}
+\frac{dC}{dt} = 
+\text{    약물농도증가속도 } = \text{ infusion속도 } - \text{ 제거속도 } 
+= R_0 - k\cdot A = R_0 - CL\cdot C
+\end{align*}
 
 
-Infusion 속도=제거속도인
-시점에 약물농도
+$\text{ Infusion 속도 } = \text{ 제거속도 }$인
+시점에 $\displaystyle\frac{dC}{dt}=0$ 약물농도
 일정하게 유지됨
 
 
 Plateau 도달시간
+
 • Continuous infusion시 농도가 plateau에 도달하는 시간은 투여한
 약물양이나 얼마나 자주 약물을 투여했는지 와는 무관하고 약
 물의 반감기와 관련되어 있다.
@@ -1137,7 +1184,7 @@ C_{\max, N}
 &=\magenta{\frac{Dose}{V_d}  } \ \cdot \
 \frac{1-e^{-Nk\tau}}{1-e^{-k\tau}}
 \end{align*}
-(질문) magenta 왜 equal???
+%(질문) magenta 왜 equal??? (답) 그냥 근사 
 \begin{align*}
 C_{\min, N} \ = \ C_{\max, N} \cdot e^{-k\tau}    
 \end{align*}
@@ -1150,11 +1197,10 @@ rate in == rate out
 농도가 일정하게 유지됨 
 
 \subsubsection{항정상태에서 $C_{\max, ss} $ \& $C_{\min,ss}$ }
-
-\begin{align*}
-e^{-Nk\tau} = 0     
-\end{align*}
-(질문) 위 왜 성립??
+%\begin{align*}
+%e^{-Nk\tau} \simeq 0 \qquad \text{ : steady state approximation}     
+%\end{align*}
+%(질문) 위 왜 성립??
 \begin{align*}
 C_{\max,N} \ =\  \frac{Dose}{V_d}\cdot\frac{1-e^{-Nk\tau}}{1-e^{-k\tau}}
 \end{align*}
@@ -1167,40 +1213,240 @@ Steady state approximation : \blue{$e^{-Nk\tau}\simeq 0$ }
 \begin{align*}
     C_{\min, ss} = C_{\max, ss} \cdot e^{-k\tau}
 \end{align*}
-\subsubsection{항정상태의 Average Level}
+\subsubsection{항정상태의 Average Level $\displaystyle C_{av,ss} = \frac{Dose}{CL\cdot \tau}$ (2020-23)}
 \begin{align*}
 C_{av, ss} \cdot \tau \ = \ AUC_\tau    \ = \ \frac{Dose}{CL}
 \end{align*}
-(질문) 왜 $Dose= CL\cdot AUC_\tau$ 성립??? 
-\subsubsection{Accumulation Index}
-최초투여대비 반복투여에 의해 항정상태에 이르렀을 때의 농도
+%(질문) 왜 $Dose= CL\cdot AUC_\tau$ 성립???  (답) constant CL가정하고 그냥 C\cdot CL = elimination rate를 시간으로 적분 
+\subsubsection{Accumulation Index \& Fluctuation (정의식 2020-23)}
+\begin{itemize}
+    \item Accumulation Index : 최초투여대비 반복투여에 의해 항정상태에 이르렀을 때의 농도
 (amount)의 증가분 
 \begin{align*}
 C_{\max, ss} = C_{\max,1}\ \cdot \ \underbrace{\frac{1}{1-e^{-k\tau}}}_{\text{Accumulation Index}}
 \end{align*}
-투여간격이 짧고 반감기 길수록 acculmulation 많이 됨
+투여간격이 짧고 반감기 길수록 accumulation 많이 됨 
+    \item 
+Fluctuation : $\displaystyle \frac{C_{\max,ss} - C_{\min,ss} }{C_{\min,ss} }  \ = \ e^{+k\tau}-1$ 
+
+$\because C_{\max,ss} \ = \ e^{+k\tau}\cdot C_{\min,ss} $\\
+투여간격이 짧고 반감기 길수록 fluctuation 작음
+\end{itemize}
+\subsubsection{항정상태 도달시간 : 반감기 클수록 크다}
+항정상태 도달시간은 $\tau$에 무관하고 오로지 $k$ (즉 $t_\frac{1}{2}$)에만 의존한다. 
+
+반감기가 클수록 항정상태 도달시간도 크다. 
+
 
 \section{Kinetics Following an ExtraVascular Dose} 
 \section{Changes in Pharmacokinetic Parameters}
-\subsection{Changes in $V_d$}
+\subsection{ Effects of Change in $V_d$ (2020-23) : $V_d$변화시 다른 parameter 어떻게 변화? }
 \subsection{Changes in $CL$}
 
 
+\section{Design of Dosage Regimen}
 
+\subsection{Therapeutic Window}
+Range of drug dosages or concentrations which can treat disease effectively w/o toxic effects
+
+\begin{align*}
+\min.\text{ effective concent. }\ \leq \ \text{ therapeutic window }\ \leq  \ \min.\text{ toxic concent.}    
+\end{align*}
+
+\subsection{Design of Dosage Regimen}
+dosage regimen can be designed to maintain concentration within a therapeutic window 
+
+\subsection{Maintenance dose }
+dose required for \textit{\textbf{regular}} administration to maintain a target plasma level
+
+\subsubsection{Max. maintenance dose $\displaystyle D_{\max, \text{Maintenance}} \ \&\ \tau_{\max}$ (2020-26) }
+반복투여되는 시간간격동안 떨어진 농도$(C_{\max,ss}-C_{\min,ss})$ 를 메워주는 양
+\begin{align}
+\text{max. maintenance dose : }\  D_{\max, M} \ &= \ V_d \cdot ( C_{\max, ss} - C_{\min, ss} )   \label{eq:mdose}   \\
+&= \ V_d \cdot \Delta C_{ss} \nonumber
+\end{align}
+\begin{align*}
+\text{max. 투여간격 : }\ \tau_{\max} \ = \ \underbrace{\frac{t_\frac{1}{2} }{\ln2}}_{\frac{1}{k}} \cdot \underbrace{\lnp{\frac{C_{\max, ss} }{C_{\min, ss} } }}_{k\cdot \tau} 
+\end{align*}
+
+\subsubsection{One can choose more convenient $\tau$ smaller than $\tau_{\max}$ }
+One can choose more convenient $\tau$ and $D$ other than $\tau_{\max}$ and $D_{\max, M}$, satisfying : 
+\begin{align*}
+\frac{D_{\text{other, }M }}{ \tau_\text{other}} \ = \ \frac{D_{\max, M} }{\tau_{\max} }  \end{align*}
+
+\begin{prob}{1}\label{prob:m}
+Drug A
+\begin{itemize}
+    \item 
+    therapeutic window of \SI{5-10}{mg/L}
+    \item $\displaystyle V_d = \SI{20}{L}$
+    \item $\displaystyle t_\frac{1}{2} = \SI{46}{h}$
+\end{itemize}
+이 약물의 maintenance 용량 용법을 결정하시오
+\end{prob}
+\begin{solution}
+\begin{align*}
+k = \frac{\ln 2}{t_\frac{1}{2} }
+= \frac{0.6}{\SI{46}{h}} 
+= \SI{0.015}{h^{-1}}
+\end{align*}
+($k$ 와 $t$를 곱한게  $\expp{ \ }$안에 들어가니까 $k \cdot t$가 무차원량이어야함. 
+그러니까 $\displaystyle k\cdot t_\frac{1}{2} \ = \ \ln2  $라고 외우면 쉽게 반감기 공식 외울 수 있음.)
+
+\begin{align*}
+D_{\max, M}
+\ &= \ \lf( C_{\max} - C_{\min} \rg) \ \cdot \ V_d \\
+&= \ (\SI{10}{mg/L} - \SI{5}{mg/L}) \ \cdot \ \SI{20}{L} \\
+&= \ \SI{100}{mg}
+\end{align*}
+\begin{align*}
+\tau_{\max} \ &= \ 
+\frac{1}{k}\cdot \lnp{\frac{C_{\max} }{ C_{\min}} } \\
+&= \ \SI{\frac{1}{0.015}}{h} \cdot \ln2 \\
+&= \ \SI{46}{h}
+\end{align*}
+One can choose $\tau$ and $D_M$ to satisfy 
+\begin{align*}
+\frac{D_M}{\tau} \ = \ \frac{D_{\max, M}}{\tau_{\max}} = \frac{\SI{100}{mg} }{\SI{46}{h}}    
+\end{align*}
+such as $\displaystyle \frac{\SI{50}{mg}}{\SI{24}{h} } \ = \ \frac{\SI{25}{mg}}{\SI{12}{h} }$
+\end{solution}
+\subsection{Loading dose}
+dose required to \textit{\textbf{immediately}} achieve a plasma concentration equivalent to \textit{\textbf{ss}} concentration
+\subsubsection{  언제 loading dose가 필요한가? }
+\begin{itemize}
+    \item therapeutic concentration에 빨리 도달해야하는 경우 (응급상황)
+\begin{enumerate}
+    \item sepsis : antibiotics
+    \item arrhythmia : antiarrhythmics
+    \item seizure : anticonvulsants
+    \item thromboembolic ds : anticoagulants
+\end{enumerate}
+\item 반감기가 긴 약물
+\end{itemize}
+\begin{equation}
+\text{ loading dose : }\ D_\text{loading} \ = \ V_d \cdot C_{\max}   \label{eq:ldose} 
+\end{equation}
+\cref{eq:mdose}와 \cref{eq:ldose}를 비교하면, $\displaystyle \frac{C_{\max} - C_{\min}}{C_{\max} } \ = \ 1 - e^{-k\cdot\tau_{\max}}$ 이므로 
+\begin{equation}
+D_{\max, M} \ = \ D_\text{loading} \ \cdot \ \underbrace{(1 - e^{- k\cdot \tau_{\max} })}_{ \substack{= \frac{C_{\max}- C_{\min} }{ C_{\max} }\\  \text{\small = fraction lost in interval}\\
+\text{\small = Accumulation Index 역수} } }  \label{eq:mlratio}  
+\end{equation}임을 알 수 있다.
+\begin{prob}{2}
+Drug A
+\begin{itemize}
+    \item 
+    therapeutic window of \SI{5-10}{mg/L}
+    \item $\displaystyle V_d = \SI{20}{L}$
+    \item $\displaystyle t_\frac{1}{2} = \SI{46}{h}$
+\end{itemize}
+이 약물의 loading 용량 용법을 결정하시오
+\end{prob}
+\begin{solution}
+\cref{prob:m}에서 maintenance $D$와 $\tau$를 구했었다. 이제 \cref{eq:mlratio}를 통해 loading $D$를 구하면 된다. 
+
+\end{solution}
+
+\section{Therapeutic Dosage Monitoring}
+\subsection{TDM이 필요한 경우 (기출)}
+\begin{enumerate}
+\item narrow therapeutic range
+\item significant consequences (e.g. death) associated with therapeutic failure or toxicity
+\item wide inter-patient PharmacoKinetic Variability
+\item Therapeutic effect is \red{\textbf{\textit{not}}} readily assessed 
+
+치료효과의 측정 지표가 명확하지 경우
+
+치료효과를 측정할 수 있는 명확한
+방법이 없을 때
+
+
+\item $\exists$ direct relationship between concentration and pharmacological effect
+\item an appropriate analytical method is available for the drug
+\end{enumerate}
+\subsection{TDM시 필요한 정보 (기출)}
+\begin{enumerate}
+\item serum creatinine level (estimated GFR)
+\item albumin level
+\item drug plasma concentration
+\item patient demographics
+\item concomitant medication
+\item current dosage regimen
+\item timing of sampling (투약시각 필요 기출)
+\end{enumerate}
+
+\section{Drug Drug Interactions : 동-ADMET, 역-상가,길항}
+\begin{prob}{2018-60}\label{prob:ddi}
+약물작용의 흡수에 대해 옳은 것은? 
+\begin{enumerate}
+    \item 케토코나졸과 제산제를 함께 하면 흡수가 잘 안된다. 
+    \item 테트라사이클린과 칼슘을 함께하면 안 좋다 
+    \item 사이클로스포린이랑 메토콜로마이드를 함께 섭취하면 흡수가 증가한다.
+    \item 페니실린이 프로베네시드를 함께 하면 페니실린 농도가 올라간다. 
+    
+\end{enumerate}
+\begin{solution}\normalfont 
+
+\end{solution}
+\end{prob}
+\subsection{(A) 흡수관련 상호작용 (동)}
+mobility 
+\subsection{(D) 분포관련 상호작용 }
+\subsection{(M) 대사관련 상호작용 : 부작용 클 수 있다}
+\subsubsection{ \textit{Strong} Inhibitors}
+\subsubsection{ Inducers}
+\subsection{(E) 배설관련 상호작용  }
+\subsection{(T) transporter관련 상호작용 (2020-30) }
+\subsection{상가적 상호작용}
+    \begin{itemize}
+        \item aspirin (inhibits COX-1 and hence TBX-2) + wafarin (anti-coagulation) : bleeding tendency $\uparrow$
+        \item imipramine + benztropine : anti-cholinergic effect $\uparrow$ : dry mouth, urinary retention, constipation
+        \item \ce{K^+}-sparing diuretics + ACE-i (aldosterone \footnote{aldosterone : \ce{K^+}분비, \ce{Na^+} 재흡수} 억제) : \ce{K^+} 배출 $\downarrow$  : hyperkalemia
+    \end{itemize}
+    
+\subsection{길항적 상호작용 }
+
+    \begin{itemize}
+        \item levodopa (D precursor) + haloperidol (D antagonist) 
+        \item vit.K + wafarin 
+    \end{itemize}
 
 \section{외워야할 식}
 \begin{align*}
     k_e \ = \ \frac{CL}{V_d}
 \end{align*}
 \begin{align*}
-    t_\frac{1}{2} \ = \ \frac{\ln2}{k_e}
+\text{rate of elimination} \ = \ k_e\cdot A \ = \ CL\cdot C    
+\end{align*}
+Integrating both sides of above equation w.r.t. time, we get:
+\begin{align*}
+\text{amount eliminated} \ = \ CL \cdot AUC    
 \end{align*}
 \begin{align*}
 Dose \ = \ CL \cdot AUC    
 \end{align*}
+암기법 : 도즈는 클라욱
 \begin{align*}
-\frac{AR}{A}
-\ = \ -\frac{1}{K_d}\cdot \lf( [R]_\text{tot}\rg) 
+\blue{C_{\max,1} \ = \ \frac{Dose}{V_d}}    
+\end{align*}
+\begin{align*}
+C_{av, ss} \cdot \tau \ = \ AUC_\tau    \ = \ \frac{Dose}{CL}
+\end{align*}
+\begin{align*}
+C_{\max,N} = C_{\max,1}\cdot \frac{1-e^{-Nkt}}{1-e^{-kt} }    
+\end{align*}
+\begin{align*}
+\frac{dC}{dt} \ = \ R_0 - k_e\cdot A \ = \ R_0 - CL\cdot C    
+\end{align*}
+
+\begin{align*}
+    t_\frac{1}{2} \ = \ \frac{\ln2}{k_e}
+\end{align*}
+
+
+\begin{align*}
+\frac{[AR]}{[A]}
+\ = \ -\frac{1}{K_d}\cdot \lf([AR]- [R]_\text{tot}\rg) 
 \end{align*}
 Scatchard plot 으로 알 수 있는 것 : 친화도 (기울기), 총수용체개수(y절편), 수용체종류, 결합수  
 
@@ -1214,6 +1460,10 @@ Scatchard plot 으로 알 수 있는 것 : 친화도 (기울기), 총수용체�
 
 
 CL의 단위 \si{mg/h}가 아니라 \si{L/h}  단위시간당 양이 아니라 \textit{단위시간당 \textbf{부피}}이다 !!!!
+
+
+(2020-23) AI 정의식 , fluctuation 정의식 
+
 
 
 \section{0427 1}
